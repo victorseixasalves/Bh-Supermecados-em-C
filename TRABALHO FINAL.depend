@@ -1,0 +1,106 @@
+# depslib dependency file v1.0
+1702250736 source:e:\trabalho final\trabalho final\art.c
+	<stdio.h>
+	"Art.h"
+	"Interface.h"
+
+1701363368 e:\trabalho final\trabalho final\art.h
+
+1701212514 source:e:\trabalho final\trabalho final\cliente.c
+	<stdio.h>
+	<locale.h>
+	"Cliente.h"
+	"Interface.h"
+	"Art.h"
+
+1701212220 e:\trabalho final\trabalho final\cliente.h
+
+1701710786 e:\trabalho final\trabalho final\interface.h
+
+1701715512 source:e:\trabalho final\trabalho final\interface.c
+	<windows.h>
+	"Interface.h"
+	<conio.h>
+
+1702250640 source:e:\trabalho final\trabalho final\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<locale.h>
+	"Produto.h"
+	"Interface.h"
+
+1702250610 e:\trabalho final\trabalho final\produto.h
+
+1702260942 source:e:\trabalho final\trabalho final\produto.c
+	<stdio.h>
+	<locale.h>
+	<string.h>
+	"Produto.h"
+	"Interface.h"
+	"Art.h"
+
+1701627182 source:d:\trabalho final\trabalho final\art.c
+	<stdio.h>
+	"Art.h"
+	"Interface.h"
+
+1701363368 d:\trabalho final\trabalho final\art.h
+
+1701715512 source:d:\trabalho final\trabalho final\interface.c
+	<windows.h>
+	"Interface.h"
+	<conio.h>
+
+1701710786 d:\trabalho final\trabalho final\interface.h
+
+1701807176 source:d:\trabalho final\trabalho final\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<locale.h>
+	"Produto.h"
+	"Interface.h"
+
+1701801210 d:\trabalho final\trabalho final\produto.h
+
+1701806736 source:d:\trabalho final\trabalho final\produto.c
+	<stdio.h>
+	<locale.h>
+	<string.h>
+	"Produto.h"
+	"Interface.h"
+	"Art.h"
+
+1702250736 source:c:\users\home\desktop\projetos\aeds 1 - trabalho final\art.c
+	<stdio.h>
+	"Art.h"
+	"Interface.h"
+
+1701363368 c:\users\home\desktop\projetos\aeds 1 - trabalho final\art.h
+
+1701710786 c:\users\home\desktop\projetos\aeds 1 - trabalho final\interface.h
+
+1701715512 source:c:\users\home\desktop\projetos\aeds 1 - trabalho final\interface.c
+	<windows.h>
+	"Interface.h"
+	<conio.h>
+
+1702250640 source:c:\users\home\desktop\projetos\aeds 1 - trabalho final\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<locale.h>
+	"Produto.h"
+	"Interface.h"
+
+1702250610 c:\users\home\desktop\projetos\aeds 1 - trabalho final\produto.h
+
+1702260942 source:c:\users\home\desktop\projetos\aeds 1 - trabalho final\produto.c
+	<stdio.h>
+	<locale.h>
+	<string.h>
+	"Produto.h"
+	"Interface.h"
+	"Art.h"
+

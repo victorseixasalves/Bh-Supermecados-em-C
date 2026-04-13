@@ -1,0 +1,479 @@
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+#include "Produto.h"
+#include "Interface.h"
+#include "Art.h"
+
+
+FILE*fp;
+
+Produto DigitarProduto(){ //"scanf"
+    char sprice[20]="", scorredor[20]="", squant[20]="", scode[20]="";
+    int saida=1;
+    int Tecla, Opcao = 0;
+
+    lembretes();
+
+    Produto igual;
+    Produto p;
+    Produto c;
+
+    textcoloreback(BLACK,WHITE);
+
+    strcpy(p.nome, ""); // bug em registrar nome
+    strcpy(p.funcionalidade, ""); // bug em registrar funcionalidade
+
+
+    do{
+        fseek(fp,0,SEEK_SET);
+        while(fread(&igual,sizeof(Produto),1,fp)){ //verificar se possue um codigo igual ja cadastrado
+         if(igual.code==p.code){
+           saida=2;
+          break;
+         }
+        }
+
+        if(saida==2){ //Se o usuário digitar algo ja cadastrado
+          textcoloreback(RED,WHITE);
+          Caixa(84,8,22,1,1);
+          textcoloreback(BLUE,WHITE);
+          Caixa(84,11,45,1,1);
+          setlocale(LC_ALL,"");
+          textcoloreback(RED,WHITE);
+          gotoxy(85,9);printf("[Produto já existente]");
+          textcoloreback(BLUE,WHITE);
+          gotoxy(85,12);system("pause");
+          saida=0;
+          break;
+        }
+
+        if(Opcao == 0){
+            Tecla = EntradaDados(10, 11, 3,scode);
+            p.code=atoi(scode);
+        }else if(Opcao == 1){
+            Tecla = EntradaDados(8, 14, 21,p.nome);
+        }else if(Opcao == 2){
+            Tecla = EntradaDados(19, 17, 10,p.disp);
+        }else if(Opcao == 3){
+            textcoloreback(BLACK,WHITE);
+            gotoxy(9,20);printf("R$");
+            Tecla = EntradaDados(11, 20, 5,sprice);
+            p.price=atoi(sprice);
+        }else if(Opcao == 4){
+            textcoloreback(BLACK,WHITE);
+            gotoxy(12,23);printf("Corredor ");
+            Tecla = EntradaDados(21, 23, 2,scorredor);
+            p.corredor=atoi(scorredor);
+        }else if(Opcao == 5){
+            Tecla = EntradaDados(18, 26, 20,p.funcionalidade);
+        }else if(Opcao == 6){
+            Tecla = EntradaDados(9, 29, 20,p.marca);
+        }else if(Opcao == 7){
+            Tecla = EntradaDados(14, 32, 4,squant);
+            p.quant=atoi(squant);
+        }
+
+        if(Tecla == TEC_CIMA) Opcao--;
+        if(Opcao==7 && Tecla== TEC_ENTER) break;
+        if(Tecla == TEC_BAIXO || Tecla == TEC_ENTER) Opcao++;
+        if(Opcao < 0) Opcao = 7;
+        if(Opcao > 7) Opcao = 0;
+   }while(Tecla != TEC_ESC);
+
+   if(Tecla == TEC_ESC){
+         saida=0;
+   }
+
+   switch(saida){
+    case 0:
+     c.code=-1; //envia -1 quando o usuario da esc para nao aparecer na listagem
+     return c;
+    break;
+    case 1:
+     textcoloreback(BLACK,WHITE);
+     gotoxy(1,34);system("pause");
+     return p;
+    break;
+
+   }
+}
+
+Produto AlterarProduto(int code){ //"scanf"
+    char sprice[20]="", scorredor[20]="", squant[20]="", scode[20]="";
+    int saida=1;
+    int Tecla, Opcao = 0;
+
+    lembretes();
+
+    Produto p;
+    Produto c;
+
+    textcoloreback(BLACK,WHITE);
+
+    strcpy(p.nome, ""); // bug em registrar nome
+    strcpy(p.funcionalidade, ""); // bug em registrar funcionalidade
+
+
+
+    do{
+
+        if(Opcao == 0){
+            Tecla = EntradaDados(8, 14, 21,p.nome);
+        }else if(Opcao == 1){
+            Tecla = EntradaDados(19, 17, 10,p.disp);
+        }else if(Opcao == 2){
+            textcoloreback(BLACK,WHITE);
+            gotoxy(9,20);printf("R$");
+            Tecla = EntradaDados(11, 20, 5,sprice);
+            p.price=atoi(sprice);
+        }else if(Opcao == 3){
+            textcoloreback(BLACK,WHITE);
+            gotoxy(12,23);printf("Corredor ");
+            Tecla = EntradaDados(21, 23, 2,scorredor);
+            p.corredor=atoi(scorredor);
+        }else if(Opcao == 4){
+            Tecla = EntradaDados(18, 26, 20,p.funcionalidade);
+        }else if(Opcao == 5){
+            Tecla = EntradaDados(9, 29, 20,p.marca);
+        }else if(Opcao == 6){
+            Tecla = EntradaDados(14, 32, 4,squant);
+            p.quant=atoi(squant);
+        }
+
+        if(Tecla == TEC_CIMA) Opcao--;
+        if(Opcao==6 && Tecla== TEC_ENTER) break;
+        if(Tecla == TEC_BAIXO || Tecla == TEC_ENTER) Opcao++;
+        if(Opcao < 0) Opcao = 6;
+        if(Opcao > 6) Opcao = 0;
+   }while(Tecla != TEC_ESC);
+
+   if(Tecla == TEC_ESC){
+         saida=0;
+   }
+
+   p.code=code;
+
+   switch(saida){
+    case 0:
+     c.code=-1; //envia -1 quando o usuario da esc para nao aparecer na listagem
+     return c;
+    break;
+    case 1:
+     textcoloreback(BLACK,WHITE);
+     gotoxy(1,34);system("pause");
+     return p;
+    break;
+
+   }
+}
+
+void Telacadastro(){
+    textcoloreback(BLUE,WHITE);
+    system ("cls");
+    setlocale(LC_ALL,"C");
+    Artproduto();
+    gotoxy(0, 0);
+    textcoloreback(BLUE,WHITE);
+    Caixa(0,8,60,26,1);
+
+    Caixa(9,10,3,1,0);
+    Caixa(7,13,21,1,0);
+    Caixa(18,16,10,1,0);
+    Caixa(8,19,7,1,0);
+    Caixa(11,22,11,1,0);
+    Caixa(17,25,20,1,0);
+    Caixa(8,28,20,1,0);
+    Caixa(13,31,4,1,0);
+
+    setlocale(LC_ALL,"");
+    gotoxy(2,11); printf("Código:");
+    gotoxy(2,14); printf("Nome:");
+    gotoxy(2,17); printf("Disponibilidade:");
+    gotoxy(2,20); printf("Preço:");
+    gotoxy(2,23); printf("Corredor:");
+    gotoxy(2,26); printf("Funcionalidade:");
+    gotoxy(2,29); printf("Marca:");
+    gotoxy(2,32); printf("Quantidade:");
+
+}
+
+void Telapesquisa(){
+    textcoloreback(BLUE,WHITE);
+    system ("cls");
+    setlocale(LC_ALL,"C");
+    gotoxy(0, 0);
+    Artpesquisa();
+    textcoloreback(BLUE,WHITE);
+    Caixa(0,8,60,22,1);
+
+    Caixa(28,9,3,1,0);
+
+    setlocale(LC_ALL,"");
+}
+
+Produto buscar(int codigo){
+    int p=1;
+    Produto c;
+
+    fseek(fp,0,SEEK_SET);
+
+    while(fread(&c,sizeof(Produto),1,fp)){
+      if(c.code==codigo){
+      p+=1;
+      return c;
+      }
+    }
+
+    while(p==1){
+     c.code=-1;
+     return c;
+    }
+
+}
+void imprimir(Produto f){
+
+    if(f.code!=-1){
+    textcoloreback(BLACK,WHITE);
+    gotoxy(1,13); printf("Código:");
+    gotoxy(1,15); printf("Nome:");
+    gotoxy(1,17); printf("Disponibilidade:");
+    gotoxy(1,19); printf("Preço:");
+    gotoxy(1,21); printf("Corredor:");
+    gotoxy(1,23); printf("Funcionalidade:");
+    gotoxy(1,25); printf("Marca:");
+    gotoxy(1,27); printf("Quantidade:");
+
+    gotoxy(9,13);printf("%03d",f.code);
+    gotoxy(6,15); printf("%s",f.nome);
+    gotoxy(17,17);printf("%s",f.disp);
+    gotoxy(7,19);printf("%.2lf",f.price);
+    gotoxy(10,21);printf("%d",f.corredor);
+    gotoxy(16,23);printf("%s",f.funcionalidade);
+    gotoxy(7,25);printf("%s",f.marca);
+    gotoxy(12,27);printf("%d",f.quant);
+    }
+}
+
+
+
+void Telaexcluir(){
+    int code, Tecla;
+    char scode[100]="";
+    textcoloreback(BLUE,WHITE);
+    system ("cls");
+    setlocale(LC_ALL,"C");
+    gotoxy(0, 0);
+    Artexcluir();
+    textcoloreback(BLUE,WHITE);
+    Caixa(0,6,60,6,1);
+    Caixa(17,7,3,1,0);
+
+    setlocale(LC_ALL,"");
+}
+
+void Telasair(){
+    textcoloreback(BLUE,WHITE);
+    system ("cls");
+    setlocale(LC_ALL,"C");
+    gotoxy(0, 0);
+    Artsair();
+    textcoloreback(BLUE,WHITE);
+    Caixa(30,9,26,10,1);
+
+
+    setlocale(LC_ALL,"");
+
+
+}
+
+void Telaalterar(){
+    int code, Tecla;
+    char scode[10]="";
+    textcoloreback(BLUE,WHITE);
+    system ("cls");
+    setlocale(LC_ALL,"C");
+    gotoxy(0,0);
+    Artalterar();
+    textcoloreback(BLUE,WHITE);
+    Caixa(0,6,60,28,1);
+    Caixa(17,7,3,1,0);
+
+    setlocale(LC_ALL,"");
+
+}
+
+void Telalista(){
+    textcoloreback(BLUE,WHITE);
+    system ("cls");
+    setlocale(LC_ALL,"C");
+    gotoxy(0, 0);
+    Artlista();
+    textcoloreback(BLUE,WHITE);
+    setlocale(LC_ALL,"C");
+    Caixa(0,8,65,26,1);
+    setlocale(LC_ALL,"");
+}
+
+void Telainicial(){
+    textcoloreback(BLUE,WHITE);
+    ArtBhsuper();
+    setlocale(LC_ALL,"C");
+    textcoloreback(BLUE,WHITE);
+    Caixa(0,7,74,5,1);
+    setlocale(LC_ALL,"");
+    gotoxy(2,8);
+    printf("Olá bem vindo ao Bh supermercados, o que deseja fazer em nosso programa?");
+}
+
+
+int inicio(){
+    int opcao;
+
+     Telainicial();
+     int x[] = {2,16,31,44,57,69};
+     int y[] = {11,11,11,11,11,11};
+
+     char opcoes[][100] = {"Registro","Pesquisar","Alterar","Excluir","Listar","Sair"};
+
+     opcao = Menu(x,y,opcoes,6);
+
+ return opcao;
+}
+
+int confirmar(){
+    int opcao;
+
+     Telasair();
+     int x[] = {36,48};
+     int y[] = {15,15};
+
+     gotoxy(32,11);
+     printf("Deseja sair do programa?");
+     char opcoes[][100] = {"Sim","Não"};
+
+     opcao = Menu(x,y,opcoes,2);
+
+return opcao;
+}
+
+int excluir(int code){
+
+    Produto p;
+
+    fseek(fp,0,SEEK_SET);
+    while(fread(&p,sizeof(Produto),1,fp)){
+        if(p.code==code){
+        p.code=-1;
+        fseek(fp,-sizeof(Produto),SEEK_CUR);
+        fwrite(&p,sizeof(Produto),1,fp);
+        textcoloreback(GREEN,WHITE);
+        gotoxy(1,10);printf("[Produto excluido com sucesso!]");
+        return 1;
+        }else{
+        textcoloreback(RED,WHITE);
+        gotoxy(1,10);printf("[Produto não existe]");
+        }
+    }
+
+
+return 0;
+}
+
+int alterar(int codigo){
+    int porta=1, Tecla;
+    Produto C;
+    fseek(fp,0,SEEK_SET);
+    while(fread(&C,sizeof(Produto),1,fp)){
+        if(C.code!=-1){
+         if(C.code==codigo){
+            porta--;
+            setlocale(LC_ALL,"C");
+            textcoloreback(BLUE,WHITE);
+
+
+            Caixa(7,13,21,1,0);
+            Caixa(18,16,10,1,0);
+            Caixa(8,19,7,1,0);
+            Caixa(11,22,11,1,0);
+            Caixa(17,25,20,1,0);
+            Caixa(8,28,20,1,0);
+            Caixa(13,31,4,1,0);
+
+            setlocale(LC_ALL,"");
+            textcoloreback(GREEN,WHITE);
+            gotoxy(2,11);printf("[Produto encontrado!Digite a alteração]");
+            textcoloreback(BLUE,WHITE);
+            gotoxy(2,14); printf("Nome:");
+            gotoxy(2,17); printf("Disponibilidade:");
+            gotoxy(2,20); printf("Preço:");
+            gotoxy(2,23); printf("Corredor:");
+            gotoxy(2,26); printf("Funcionalidade:");
+            gotoxy(2,29); printf("Marca:");
+            gotoxy(2,32); printf("Quantidade:");
+
+            C=AlterarProduto(codigo);
+            if(C.code!=-1){
+            fseek(fp,-sizeof(Produto),SEEK_CUR);
+            fwrite(&C,sizeof(Produto),1,fp);
+            }
+            return 1;
+         }
+        }
+
+    }
+
+    if(porta==1){
+        textcoloreback(RED,WHITE);
+        gotoxy(1,10);printf("[Produto não encontrado.]");
+        textcoloreback(BLACK,WHITE);
+        gotoxy(1,34);system("pause");
+    }
+
+
+
+return 0;
+}
+
+void lembretes(){
+    setlocale(LC_ALL,"C");
+    Caixa(62,8,20,26,1);
+
+    textcoloreback(RED,WHITE);
+    gotoxy(68,9);printf("LEMBRETES!");
+    textcoloreback(BLUE,WHITE);
+    gotoxy(63,10);printf("====================");
+    gotoxy(63,12);printf("Disponibilidade:");
+    textcoloreback(BLACK,WHITE);
+    gotoxy(63,13);printf("dd/mm/aa");
+    gotoxy(63,14);printf("(Data em que chegou");
+    gotoxy(63,15);printf("ao supermercado)");
+    textcoloreback(BLUE,WHITE);
+    gotoxy(63,18);printf("Funcionalidade:");
+    textcoloreback(BLACK,WHITE);
+    gotoxy(63,19);printf("Ex:Comida,Limpeza...");
+
+
+}
+
+void mostrarlist(){
+  int i;
+  Produto prod;
+
+  i=0;
+  setlocale(LC_ALL,"C");
+  Caixa(62,8,20,26,1);
+  textcoloreback(BLACK,WHITE);
+  gotoxy(63,9);printf("Produtos registrados",prod.code);
+  textcoloreback(BLUE,WHITE);
+  gotoxy(63,10);printf("====================",prod.code);
+  while(fread(&prod,sizeof(Produto),1,fp)){
+    if(prod.code!=-1){
+    gotoxy(63,11+i);printf("Produto %03d",prod.code);
+    i++;
+    }
+  }
+  setlocale(LC_ALL,"");
+}
+
+
