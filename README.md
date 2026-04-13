@@ -1,7 +1,5 @@
 # 🛒 BH Supermercados
-
-Sistema de gerenciamento de produtos desenvolvido em **linguagem C** para o trabalho final da disciplina. O programa roda no terminal do Windows com interface visual feita em ASCII Art e permite o gerenciamento completo do estoque de um supermercado.
-
+<img width="510" height="169" alt="Bh Supermercados" src="https://github.com/user-attachments/assets/be5caa09-634d-470b-b871-ba7daec73605" />
 ---
 
 ## ✅ Funcionalidades
