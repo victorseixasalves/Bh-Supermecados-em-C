@@ -86,4 +86,4 @@ Os dados são salvos em formato binário no arquivo `Arquivo.txt`, criado automa
 
 ## 👨‍💻 Autor
 
-Victor Seixas Alves, resultado do trabalho final da disciplina de **Algoritmo e Estrutura de Dados**
+Victor Seixas Alves, resultado do trabalho final da disciplina de **Algoritmo e Estrutura de Dados** do curso de *Sistemas de Informação (1° Período) - Unimontes*
